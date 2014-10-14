@@ -1,18 +1,6 @@
 %OPERADORES_PROPRIOS
-:-op(1100, xfx,[nasceEm,eh,ehUm,temForca, ehProgenitorDe, afiliadoAh, tipoAkuma]).
+:-op(1100, xfx,[nasceEm,eh,ehUm,temForca, ehProgenitorDe, afiliadoAh, tipoAkuma, ehUmPirata, ehUmMarinheiro]).
 :-op(1000, xfx,[ehAvooDe, ehAvohDe, ehPaiDe,ehMaeDe,ehFilhoDe,ehFilhaDe,ehNetoDe,ehNetaDe,ehIrmaoDe,ehIrmaDe]).
- 
-%FATOS_DINAMICOS
-:- dynamic forca/2.
-:- dynamic vilao/1.
-:- dynamic deus/1.
-:- dynamic pirata/1.
-:- dynamic marinheiro/1.
-:- dynamic cp9/1.
-:- dynamic warlord/1.
-:- dynamic revolucionario/1.
-:- dynamic sobreHumano/2.
-:- dynamic progenitor/2.
  
 %GENEROS
 akainu eh homem.
@@ -187,7 +175,7 @@ roronoa_zoro temForca 700.
 rob_lucci temForca 690. 
 sabo temForca 910.
 sanji temForca 670.
-sengoku temForca 940.
+sengoku temForca 960.
 shanks temForca 960.
 smoker temForca 760.
 tashigi temForca 490.
@@ -195,7 +183,7 @@ trafalgar_law temForca 780.
 usopp temForca 550.
  
 %REGRAS
-ganha_luta_com(X,Y):-forca(X,NivelX), forca(Y,NivelY), NivelX > NivelY.
+ganha_luta_com(X,Y):- (X temForca Z), (Y temForca P), Z > P.
 
 X ehUm pirata:- X afiliadoAh pirataria.
 X ehUm revolucionario:- X afiliadoAh anarquia.
@@ -204,11 +192,12 @@ X ehUm cp9:- X afiliadoAh governo_intel.
 X ehUm warlord:- X afiliadoAh governo_arma.
 X ehUm sobreHumano:- (X tipoAkuma paramecia); (X tipoAkuma logia); (X tipoAkuma zoan).
  
-X ehUm pirataRegular:- (X ehUm pirata), (X temForca Y), (Y > 0), (Y < 700).
-X ehUm supernova:- (X ehUm pirata), (X temForca Y), (Y > 699), (Y < 900).
-X ehUm yonko:- (X ehUm pirata), (X temForca Y), (Y > 899).
+X ehUmPirata regular:- (X ehUm pirata), (X temForca Y), (Y > 0), (Y < 700).
+X ehUmPirata supernova:- (X ehUm pirata), (X temForca Y), (Y > 699), (Y < 900).
+X ehUmPirata yonko:- (X ehUm pirata), (X temForca Y), (Y > 899).
 
-X ehUm marinheiroRegular:- (X ehUm marinheiro), (X temForca Y), (Y > 0), (Y < 400).
-X ehUm capitao:- (X ehUm marinheiro), (X temForca Y), (Y > 399), (Y < 800).
-X ehUm vice_almirante:- (X ehUm marinheiro), (X temForca Y), (Y > 799), (Y < 900).
-X ehUm almirante:- (X ehUm marinheiro), (X temForca Y), (Y > 899).
+X ehUmMarinheiro regular:- (X ehUm marinheiro), (X temForca Y), (Y > 0), (Y < 400).
+X ehUmMarinheiro capitao:- (X ehUm marinheiro), (X temForca Y), (Y > 399), (Y < 800).
+X ehUmMarinheiro vice_almirante:- (X ehUm marinheiro), (X temForca Y), (Y > 799), (Y < 900).
+X ehUmMarinheiro almirante:- (X ehUm marinheiro), (X temForca Y), (Y > 899), (Y < 950).
+X ehUmMarinheiro almiranteDaFrota:- (X ehUm marinheiro), (X temForca Y), (Y > 950).
